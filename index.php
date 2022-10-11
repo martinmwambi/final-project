@@ -1,111 +1,52 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Farmers Information Service</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
-        <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">    
-    </head >
-    <body>  
-        <nav>
-            <input type="checkbox" id="check">
-            <label for="check" class="checkbtn">
-                <i class="fas fa-bars"></i>
-            </label>
-            <label class="logo">FARMERS INFORMATION SERVICE</label>
-            <ul>
-                <li><a class="active" href="index.php">Home</a></li>
-                <li><a href="about.html">About</a></li> 
-                <li><a href="registervet.html">Register as Vet</a></li>
-                <li><a href="contacts of vets.html">Contacts of Vets</a></li>
-                <li><a href="help.php">Help</a></li>
-            </ul>    
-        </nav><br>
 
-     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card mt-4">
-                    <div class="card-header">
-                        <h4>Search Diseases and their Treatment/Control</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-7">
 
-                                <form action="" method="GET">
-                                    <div class="input-group mb-3">
-                                        <input type="text" name="search" required value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control" placeholder="Input Symptom">
-                                        <button type="submit" class="btn btn-primary">Search</button>
-                                    </div>
-                                </form>
+<?php 
+  session_start();
+  if(isset($_SESSION['unique_id'])){
+    header("location: users.php");
+  }
+?>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-12">
-                <div class="card mt-4">
-                    <div class="card-body">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Disease</th>
-                                    <th>Symptoms</th>
-                                    <th>Treatment/Control</th>
-                                    
-                                </tr> 
-                            </thead>
-                            <tbody>
-                                <?php 
-                                    $con = mysqli_connect("localhost","root","","livestock diseases");
-
-                                    if(isset($_GET['search']))
-                                    {
-                                        $filtervalues = $_GET['search'];
-                                        $query = "SELECT * FROM diseases WHERE CONCAT(Disease,Symptoms,Treatment/Control) LIKE '%$filtervalues%' ";
-                                        $query_run = mysqli_query($con, $query);
-
-                                        if(mysqli_num_rows($query_run) > 0)
-                                        {
-                                            foreach($query_run as $items)
-                                            {
-                                                ?>
-                                                <tr>
-                                                    <td><?= $items['id']; ?></td>
-                                                    <td><?= $items['Disease']; ?></td>
-                                                    <td><?= $items['Symptoms']; ?></td>
-                                                    <td><?= $items['Treatment/Control']; ?></td>
-                                                </tr>
-                                                <?php
-                                            }
-                                        }
-                                        else
-                                        {
-                                            ?>
-                                                <tr>
-                                                    <td colspan="4">No Record Found</td>
-                                                </tr>
-                                            <?php
-                                        }
-                                    }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+<?php include_once "header.php"; ?>
+<body>
+  <div class="wrapper">
+    <section class="form signup">
+      <header>CHAT SERVICE</header>
+      <form action="#" method="POST" enctype="multipart/form-data" autocomplete="off">
+        <div class="error-text"></div>
+        <div class="name-details">
+          <div class="field input">
+            <label>First Name</label>
+            <input type="text" name="fname" placeholder="First name" required>
+          </div>
+          <div class="field input">
+            <label>Last Name</label>
+            <input type="text" name="lname" placeholder="Last name" required>
+          </div>
         </div>
-    </div>
+        <div class="field input">
+          <label>Email Address</label>
+          <input type="text" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="field input">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Enter new password" required>
+          <i class="fas fa-eye"></i>
+        </div>
+        <div class="field image">
+          <label>Select Image</label>
+          <input type="file" name="image" accept="image/x-png,image/gif,image/jpeg,image/jpg" required>
+        </div>
+        <div class="field button">
+          <input type="submit" name="submit" value="Continue to Chat">
+        </div>
+      </form>
+      <div class="link">Already signed up? <a href="login.php">Login now</a></div>
+    </section>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>    
-            
-    </body>
-</html> 
+  <script src="javascript/pass-show-hide.js"></script>
+  <script src="javascript/signup.js"></script>
 
+</body>
+</html>

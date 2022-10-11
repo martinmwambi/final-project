@@ -3,7 +3,7 @@
 $server = "localhost";
 $user = "root";
 $pass = "";
-$database = "registration of vets";
+$database = "livestock diseases";
 
 $conn = mysqli_connect($server, $user, $pass, $database);
 

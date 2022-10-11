@@ -2,7 +2,7 @@
 $dbhost = "localhost";
 $dbuser = "root";
 $dbpass = "";
-$dbname = "registration of vets";
+$dbname = "livestock diseases";
 
 $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
 
